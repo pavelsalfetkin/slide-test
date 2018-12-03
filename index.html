@@ -4,38 +4,36 @@
     <title>Павел Салфеткин</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <!-- <link rel="icon" href="images/favicon.svg" sizes="any" type="image/svg+xml"> -->
   </head>
 
   <body>
-    <div class="container">
-
-      <div class="main-add">
-        <div id="right-dots">
-          <div class="right-dots__1 active"></div>
-          <div class="right-dots__2"></div>
-          <div class="right-dots__3"></div>
-        </div>
-  
-        <div id="bottom-block">
+    <div class="navigation">
+      <div class="nav-container">
+        <div id="bottom-block" class="bottom-block active">
           <p class="bottom-block__text">Листайте вниз</p>
           <svg class="bottom-block__arrow" id="arrow-bottom" x="0px" y="0px" width="46px" height="20.331px" viewBox="0 0 46 20.331" enable-background="new 0 0 46 20.331">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M1,1l22.276,18.038L45,1"/>
           </svg>
         </div>
+        <div id="right-dots">
+          <div class="right-dots__1 active"></div>
+          <div class="right-dots__2"></div>
+          <div class="right-dots__3"></div>
+        </div>
       </div>
+    </div>
 
-      <div id="main">
-
-        <div class="section " id="section1">
-
+    <div class="container">
+      <div class="section " id="section1">
+        <div class="section-cont">
           <div class="parallax__layer parallax__layer--base">
-            <p class="title">Всегда ли цели терапии СД2<br> на поверхности?</p>
+            <span class="title">Всегда ли цели терапии СД2<br> на поверхности?</span>
             <div class="text-block-1">
-              <p class="text">Гипогликемия</p>
+              <span class="text">Гипогликемия</span>
               <div class="pic">
                 <svg id="circle-30" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30">
                   <g>
@@ -84,7 +82,7 @@
             </div>
 
             <div class="text-block-2">
-              <p class="text">Осложнения СД</p>
+              <span class="text">Осложнения СД</span>
               <div class="pic">
                 <svg id="circle-20" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 30 30" enable-background="new 0 0 30 30">
                     <g>
@@ -133,7 +131,7 @@
             </div>
 
             <div class="text-block-3">
-              <p class="text">Цель по HbA1c</p>
+              <span class="text">Цель по HbA1c</span>
               <div class="pic">
                 <svg id="circle-60" x="0px" y="0px" width="60px" height="60px" viewBox="0 0 30 30" enable-background="new 0 0 30 30">
                     <g>
@@ -182,7 +180,7 @@
             </div>
 
             <div class="text-block-4">
-              <p class="text">СС риски</p>
+              <span class="text">СС риски</span>
               <div class="pic">
                 <svg id="circle-20" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 30 30" enable-background="new 0 0 30 30">
                     <g>
@@ -227,29 +225,31 @@
                     </radialGradient>
                     <circle opacity="0.8" fill="url(#SVGID_5_)" cx="15" cy="15" r="4.501"/>
                   </svg>
+                </div>
               </div>
+              
             </div>
-            
-          </div>
         </div>
+      </div>
 
-        <div class="section " id="section2">
+      <div class="section " id="section2">
+        <div class="section-cont">
           <div class="parallax__layer parallax__layer--front"></div>
           <div class="parallax__layer parallax__layer--base">
             <p class="title">Основа терапии —<br> патогенез СД2</p>
           </div>
         </div>
+      </div>
 
-        <div class="section " id="section3">
+      <div class="section " id="section3">
+        <div class="section-cont">
           <div class="parallax__layer parallax__layer--base">
-
             <div id="slides" class="slides-container">
               <div class="slide-1"></div>
               <div class="slide-2"></div>
               <div class="slide-3"></div>
             </div>
-
-            <div class="slider-container">
+            <div id="slider-cont" class="slider-container">
               <div class="slider-move">
                 <input id="slider" class="slider" type="range" min="1" max="100" value="100" step="1">
                 <div id="runner" class="slider-runner"></div>
@@ -261,10 +261,8 @@
                 <span>2016</span>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
 
