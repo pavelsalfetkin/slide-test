@@ -3,6 +3,7 @@
 /* ---------------------------------------------------------------------------- */
 
 
+var container = document.getElementById("container");
 var sliderCont = document.getElementById("slider-cont");
 var sliderIce = document.getElementById("slider");
 var slides = document.getElementById("slides");
@@ -57,7 +58,15 @@ function bottomSlider () {
 
 const switchToSection1 = () => {
 	console.log("slide to section1");
-	section1.scrollIntoView({block: "start", behavior: "smooth"});
+	// section1.scrollIntoView({block: "start", behavior: "smooth"});
+	section1.style.transform = 'translateY(0%)';
+	section2.style.transform = 'translateY(0%)';
+	section3.style.transform = 'translateY(0%)';
+
+	section1.style.transition = 'all 700ms ease 0s';
+	section2.style.transition = 'all 700ms ease 0s';
+	section3.style.transition = 'all 700ms ease 0s';
+
 	bottomBlock.classList.remove('none');
 	bottomBlock.classList.add('active');
 	rightDots.children[0].classList.add('active');
@@ -67,7 +76,15 @@ const switchToSection1 = () => {
 
 const switchToSection2 = () => {
 		console.log("slide to section2");
-		section2.scrollIntoView({block: "start", behavior: "smooth"});
+		// section2.scrollIntoView({block: "start", behavior: "smooth"});
+		section1.style.transform = 'translateY(-100%)';
+		section2.style.transform = 'translateY(-100%)';
+		section3.style.transform = 'translateY(-100%)';
+
+		section1.style.transition = 'all 700ms ease 0s';
+		section2.style.transition = 'all 700ms ease 0s';
+		section3.style.transition = 'all 700ms ease 0s';
+
 		bottomBlock.classList.add('none');
 		bottomBlock.classList.remove('active');
 		rightDots.children[0].classList.remove('active');
@@ -77,8 +94,15 @@ const switchToSection2 = () => {
 
 const switchToSection3 = () => {
 		console.log("slide to section3");
-		section3.scrollIntoView({block: "start", behavior: "smooth"});
-		// bottomBlock.setAttribute('class', 'bottom-block-none');
+		// section3.scrollIntoView({block: "start", behavior: "smooth"});
+		section1.style.transform = 'translateY(-200%)';
+		section2.style.transform = 'translateY(-200%)';
+		section3.style.transform = 'translateY(-200%)';
+
+		section1.style.transition = 'all 700ms ease 0s';
+		section2.style.transition = 'all 700ms ease 0s';
+		section3.style.transition = 'all 700ms ease 0s';
+
 		rightDots.children[0].classList.remove('active');
 		rightDots.children[1].classList.remove('active');
 		rightDots.children[2].classList.add('active');
