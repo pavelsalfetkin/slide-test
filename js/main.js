@@ -57,7 +57,7 @@ function bottomSlider () {
 };
 
 const switchToSection1 = () => {
-	console.log("slide to section1");
+	// console.log("slide to section1");
 	// section1.scrollIntoView({block: "start", behavior: "smooth"});
 	// section1.style.transform = 'translate3d(0px, 0px, 0px)';
 	// section2.style.transform = 'translate3d(0px, 0px, 0px)';
@@ -81,7 +81,7 @@ const switchToSection1 = () => {
 };
 
 const switchToSection2 = () => {
-		console.log("slide to section2");
+		// console.log("slide to section2");
 		// section2.scrollIntoView({block: "start", behavior: "smooth"});
 		// section1.style.transform = 'translate3d(0px, -100%, 0px)';
 		// section2.style.transform = 'translate3d(0px, -100%, 0px)';
@@ -105,7 +105,7 @@ const switchToSection2 = () => {
 };
 
 const switchToSection3 = () => {
-		console.log("slide to section3");
+		// console.log("slide to section3");
 		// section3.scrollIntoView({block: "start", behavior: "smooth"});
 		// section1.style.transform = 'translate3d(0px, -200%, 0px)';
 		// section2.style.transform = 'translate3d(0px, -200%, 0px)';
@@ -127,55 +127,59 @@ const switchToSection3 = () => {
 };
 
 function swipeFromSection1 (event) {
+	console.log(`event.target`, event.target);
 	this.startPoint = event.targetTouches[0].clientY;
 	this.endPoint;
 	this.addEventListener('touchmove', function(event) {
 		this.endPoint = event.targetTouches[0].clientY;
-	});
-	this.addEventListener('touchend', function() {
 		if (this.startPoint > this.endPoint) switchToSection2();
 	});
+	// this.addEventListener('touchend', function() {
+	// 	if (this.startPoint > this.endPoint) switchToSection2();
+	// });
 }
 
 function swipeFromSection2 (event) {
+	console.log(`event.target`, event.target);
 	this.startPoint = event.targetTouches[0].clientY;
 	this.endPoint;
 	this.addEventListener('touchmove', function(event) {
 		this.endPoint = event.targetTouches[0].clientY;
-	});
-	this.addEventListener('touchend', function() {
 		if (this.startPoint > this.endPoint) switchToSection3();
 		else switchToSection1();
 	});
-	
+	// this.addEventListener('touchend', function() {
+	// 	if (this.startPoint > this.endPoint) switchToSection3();
+	// 	else switchToSection1();
+	// });	
 }
 
 function swipeFromSection3 (event) {
+	console.log(`event.target`, event.target);
 	this.startPoint = event.targetTouches[0].clientY;
 	this.endPoint;
 	this.addEventListener('touchmove', function(event) {
 		this.endPoint = event.targetTouches[0].clientY;
-	});
-	this.addEventListener('touchend', function() {
 		if (this.startPoint < this.endPoint) switchToSection2();
 	});
+	// this.addEventListener('touchend', function() {
+	// 	if (this.startPoint < this.endPoint) switchToSection2();
+	// });
 }
 
-// const touchEventRemove = () => {
-// 	console.log("section - remove")
-// 	section1.removeEventListener('touchstart', swipeFromSection1);
-// 	section2.removeEventListener('touchstart', swipeFromSection3);
-// 	section3.removeEventListener('touchstart', swipeFromSection3);
-// };
+const touchEventRemove = () => {
+	console.log("section - remove")
+	section1.removeEventListener('touchstart', swipeFromSection1);
+	section2.removeEventListener('touchstart', swipeFromSection3);
+	section3.removeEventListener('touchstart', swipeFromSection3);
+};
 
-// const touchEventAdd = () => {
-// 	setTimeout(function() {
-// 		console.log("section - add")
-// 		section1.addEventListener('touchstart', swipeFromSection1);
-// 		section2.addEventListener('touchstart', swipeFromSection2);
-// 		section3.addEventListener('touchstart', swipeFromSection3);
-// 	}, 10000);
-// };
+const touchEventAdd = () => {
+	console.log("section - add")
+	section1.addEventListener('touchstart', swipeFromSection1);
+	section2.addEventListener('touchstart', swipeFromSection2);
+	section3.addEventListener('touchstart', swipeFromSection3);
+};
 
 
 /* ---------------------------------------------------------------------------- */
@@ -183,25 +187,25 @@ function swipeFromSection3 (event) {
 /* ---------------------------------------------------------------------------- */
 
 
-// section1.addEventListener('touchstart', swipeFromSection1);
-// section2.addEventListener('touchstart', swipeFromSection2);
-// section3.addEventListener('touchstart', swipeFromSection3);
+section1.addEventListener('touchstart', swipeFromSection1, false);
+section2.addEventListener('touchstart', swipeFromSection2, false);
+section3.addEventListener('touchstart', swipeFromSection3, false);
 
-section1.addEventListener('wheel', function(e) {
+section1.addEventListener('scroll', function(e) {
 	if (e.deltaY > 10) switchToSection2();
 });
 
-section2.addEventListener('wheel', function(e) {
+section2.addEventListener('scroll', function(e) {
 	if (e.deltaY < -10) switchToSection1();
 	else if (e.deltaY > 10) switchToSection3();
 });
 
-section3.addEventListener('wheel', function(e) {
+section3.addEventListener('scroll', function(e) {
 	if (e.deltaY < -10) switchToSection2();
 });
 
-// sliderIce.addEventListener('touchstart', touchEventRemove);
-// sliderIce.addEventListener('touchend', touchEventAdd);
+sliderIce.addEventListener('touchstart', touchEventRemove);
+sliderIce.addEventListener('touchend', touchEventAdd);
 
 sliderIce.addEventListener('input', bottomSlider);
 
