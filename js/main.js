@@ -2,7 +2,7 @@
 /* ---------------------------------  CONST  ---------------------------------- */
 /* ---------------------------------------------------------------------------- */
 
-
+var parallax = document.getElementById("parallax__layer--front");
 var container = document.getElementById("container");
 var sliderCont = document.getElementById("slider-cont");
 var sliderIce = document.getElementById("slider");
@@ -30,11 +30,11 @@ const animation = (circles) => {
 	var posEnd = 13.4;
 	var shiftInterval = 0.2;
 	var ms = 40;
-	setInterval(frame, ms);
+	var animate = setInterval(frame, ms);
   function frame() {
     if (posStart >= posEnd) {
     	posStart = 4;
-      frame();
+      requestAnimationFrame(frame);
     }
     else {
 			posStart += shiftInterval;
@@ -59,53 +59,71 @@ function bottomSlider () {
 const switchToSection1 = () => {
 	console.log("slide to section1");
 	// section1.scrollIntoView({block: "start", behavior: "smooth"});
-	section1.style.transform = 'translateY(0%)';
-	section2.style.transform = 'translateY(0%)';
-	section3.style.transform = 'translateY(0%)';
+	// section1.style.transform = 'translate3d(0px, 0px, 0px)';
+	// section2.style.transform = 'translate3d(0px, 0px, 0px)';
+	// section3.style.transform = 'translate3d(0px, 0px, 0px)';
 
-	section1.style.transition = 'all 700ms ease 0s';
-	section2.style.transition = 'all 700ms ease 0s';
-	section3.style.transition = 'all 700ms ease 0s';
+	// section1.style.transition = 'all 700ms ease 0s';
+	// section2.style.transition = 'all 700ms ease 0s';
+	// section3.style.transition = 'all 700ms ease 0s';
 
-	bottomBlock.classList.remove('none');
-	bottomBlock.classList.add('active');
-	rightDots.children[0].classList.add('active');
-	rightDots.children[1].classList.remove('active');
-	rightDots.children[2].classList.remove('active');
+	container.style.transform = 'translate3d(0px, 0px, 0px)';
+	container.style.transition = 'all 700ms ease 0s';
+
+	parallax.style.transform = 'translate3d(0px, -40px, 0px)';
+		parallax.style.transition = 'all 700ms ease 0s';
+
+	// bottomBlock.classList.remove('none');
+	// bottomBlock.classList.add('active');
+	// rightDots.children[0].classList.add('active');
+	// rightDots.children[1].classList.remove('active');
+	// rightDots.children[2].classList.remove('active');
 };
 
 const switchToSection2 = () => {
 		console.log("slide to section2");
 		// section2.scrollIntoView({block: "start", behavior: "smooth"});
-		section1.style.transform = 'translateY(-100%)';
-		section2.style.transform = 'translateY(-100%)';
-		section3.style.transform = 'translateY(-100%)';
+		// section1.style.transform = 'translate3d(0px, -100%, 0px)';
+		// section2.style.transform = 'translate3d(0px, -100%, 0px)';
+		// section3.style.transform = 'translate3d(0px, -100%, 0px)';
 
-		section1.style.transition = 'all 700ms ease 0s';
-		section2.style.transition = 'all 700ms ease 0s';
-		section3.style.transition = 'all 700ms ease 0s';
+		// section1.style.transition = 'all 700ms ease 0s';
+		// section2.style.transition = 'all 700ms ease 0s';
+		// section3.style.transition = 'all 700ms ease 0s';
 
-		bottomBlock.classList.add('none');
-		bottomBlock.classList.remove('active');
-		rightDots.children[0].classList.remove('active');
-		rightDots.children[1].classList.add('active');
-		rightDots.children[2].classList.remove('active');
+		container.style.transform = 'translate3d(0px, -768px, 0px)';
+		container.style.transition = 'all 700ms ease 0s';
+
+		parallax.style.transform = 'translate3d(0px, 0px, 0px)';
+		parallax.style.transition = 'all 1400ms ease 0s';
+
+		// bottomBlock.classList.add('none');
+		// bottomBlock.classList.remove('active');
+		// rightDots.children[0].classList.remove('active');
+		// rightDots.children[1].classList.add('active');
+		// rightDots.children[2].classList.remove('active');
 };
 
 const switchToSection3 = () => {
 		console.log("slide to section3");
 		// section3.scrollIntoView({block: "start", behavior: "smooth"});
-		section1.style.transform = 'translateY(-200%)';
-		section2.style.transform = 'translateY(-200%)';
-		section3.style.transform = 'translateY(-200%)';
+		// section1.style.transform = 'translate3d(0px, -200%, 0px)';
+		// section2.style.transform = 'translate3d(0px, -200%, 0px)';
+		// section3.style.transform = 'translate3d(0px, -200%, 0px)';
 
-		section1.style.transition = 'all 700ms ease 0s';
-		section2.style.transition = 'all 700ms ease 0s';
-		section3.style.transition = 'all 700ms ease 0s';
+		// section1.style.transition = 'all 700ms ease 0s';
+		// section2.style.transition = 'all 700ms ease 0s';
+		// section3.style.transition = 'all 700ms ease 0s';
 
-		rightDots.children[0].classList.remove('active');
-		rightDots.children[1].classList.remove('active');
-		rightDots.children[2].classList.add('active');
+		container.style.transform = 'translate3d(0px, -1536px, 0px)';
+		container.style.transition = 'all 700ms ease 0s';
+
+		parallax.style.transform = 'translate3d(0px, 80px, 0px)';
+		parallax.style.transition = 'all 700ms ease 0s';
+
+		// rightDots.children[0].classList.remove('active');
+		// rightDots.children[1].classList.remove('active');
+		// rightDots.children[2].classList.add('active');
 };
 
 function swipeFromSection1 (event) {
@@ -165,9 +183,9 @@ function swipeFromSection3 (event) {
 /* ---------------------------------------------------------------------------- */
 
 
-section1.addEventListener('touchstart', swipeFromSection1);
-section2.addEventListener('touchstart', swipeFromSection2);
-section3.addEventListener('touchstart', swipeFromSection3);
+// section1.addEventListener('touchstart', swipeFromSection1);
+// section2.addEventListener('touchstart', swipeFromSection2);
+// section3.addEventListener('touchstart', swipeFromSection3);
 
 section1.addEventListener('wheel', function(e) {
 	if (e.deltaY > 10) switchToSection2();
@@ -195,7 +213,7 @@ sliderIce.addEventListener('input', bottomSlider);
 /* ---------------------------------------------------------------------------- */
 
 
-(() => {
-	animation(circleAnimRadius1);
-	setTimeout(function() { animation(circleAnimRadius2) }, 1000);
-})();
+// (() => {
+// 	requestAnimationFrame(animation(circleAnimRadius1));
+// 	requestAnimationFrame(animation(setTimeout(function() { animation(circleAnimRadius2) }, 1000)));
+// })();
