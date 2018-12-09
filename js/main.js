@@ -2,6 +2,7 @@
 /* ---------------------------------  CONST  ---------------------------------- */
 /* ---------------------------------------------------------------------------- */
 
+
 var parallax = document.getElementById("parallax__layer--front");
 var container = document.getElementById("container");
 var sliderCont = document.getElementById("slider-cont");
@@ -14,8 +15,12 @@ var sliderRunner = document.getElementById("runner");
 var rightDots = document.getElementById("right-dots");
 var bottomBlock = document.getElementById("bottom-block");
 
-var circleAnimRadius1 = Array.from(document.getElementsByClassName("circle__radius-1"));
-var circleAnimRadius2 = Array.from(document.getElementsByClassName("circle__radius-2"));
+var circle1R30 = document.getElementById("circle-1-30px");
+var circle2R20 = document.getElementById("circle-2-20px");
+var circle3R60 = document.getElementById("circle-3-60px");
+var circle4R20 = document.getElementById("circle-4-20px");
+
+var circleAnimRadius = [circle1R30, circle2R20, circle3R60, circle4R20];
 
 
 /* ---------------------------------------------------------------------------- */
@@ -25,23 +30,40 @@ var circleAnimRadius2 = Array.from(document.getElementsByClassName("circle__radi
 
 const RUNNER_WIDTH = sliderRunner.offsetWidth / 100;
 
-const animation = (circles) => {
-	var posStart = 4;
-	var posEnd = 13.4;
-	var shiftInterval = 0.2;
-	var ms = 40;
-	var animate = setInterval(frame, ms);
-  function frame() {
-    if (posStart >= posEnd) {
-    	posStart = 4;
-      requestAnimationFrame(frame);
-    }
-    else {
-			posStart += shiftInterval;
-			circles.forEach(x => x.r.baseVal.value = posStart);
-    }
-  }
-};
+circleAnimRadius.forEach(circle => circle.children[1].r.baseVal.value = 0);
+circleAnimRadius.forEach(circle => circle.children[2].r.baseVal.value = 0);
+
+function animateCircle(circleArr, durationMs, index, timeout) {
+	var runtime;
+	var progress;
+	var starttime;
+	var duration = durationMs;
+
+	function loop(timestamp) {
+		runtime = timestamp - starttime;
+		progress = Math.min(runtime / duration, 1);
+		circleArr.forEach(circle => circle.children[index].r.baseVal.value = (circle.children[0].r.baseVal.value * progress).toFixed(2));
+		if (runtime >= duration) {
+			starttime = window.performance.now();
+			window.requestAnimationFrame(loop);
+		}
+		else {
+			window.requestAnimationFrame(loop);
+		}
+	};
+
+	if (!timeout) {
+		starttime = window.performance.now();
+		window.requestAnimationFrame(loop);
+	}
+	else {
+		setTimeout(function() {
+			starttime = window.performance.now();
+			window.requestAnimationFrame(loop);
+		}, duration / 2);
+	}
+}
+
 
 function bottomSlider () {
 	if (this.value <= 100 && this.value >= 71) {
@@ -191,6 +213,19 @@ section1.addEventListener('touchstart', swipeFromSection1, false);
 section2.addEventListener('touchstart', swipeFromSection2, false);
 section3.addEventListener('touchstart', swipeFromSection3, false);
 
+section1.addEventListener('wheel', function(e) {
+	if (e.deltaY > 10) switchToSection2();
+});
+
+section2.addEventListener('wheel', function(e) {
+	if (e.deltaY < -10) switchToSection1();
+	else if (e.deltaY > 10) switchToSection3();
+});
+
+section3.addEventListener('wheel', function(e) {
+	if (e.deltaY < -10) switchToSection2();
+});
+
 section1.addEventListener('scroll', function(e) {
 	if (e.deltaY > 10) switchToSection2();
 });
@@ -217,7 +252,16 @@ sliderIce.addEventListener('input', bottomSlider);
 /* ---------------------------------------------------------------------------- */
 
 
-// (() => {
-// 	requestAnimationFrame(animation(circleAnimRadius1));
-// 	requestAnimationFrame(animation(setTimeout(function() { animation(circleAnimRadius2) }, 1000)));
-// })();
+animateCircle(circleAnimRadius, 4000, 1);
+animateCircle(circleAnimRadius, 4000, 2, true);
+
+// $(window).bind(
+//   'touchmove',
+//    function(e) {
+//     e.preventDefault();
+//   }
+// );
+
+window.addEventListener('touchmove', function(e) {
+	e.preventDefault();
+});
