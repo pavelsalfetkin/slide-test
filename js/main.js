@@ -244,6 +244,8 @@ sliderIce.addEventListener('touchend', touchEventAdd);
 
 sliderIce.addEventListener('input', bottomSlider);
 
+document.addEventListener("touchmove", function(e){ e.preventDefault() }, false);
+
 // screen.lockOrientation('landscape');
 
 
@@ -254,14 +256,3 @@ sliderIce.addEventListener('input', bottomSlider);
 
 animateCircle(circleAnimRadius, 4000, 1);
 animateCircle(circleAnimRadius, 4000, 2, true);
-
-// $(window).bind(
-//   'touchmove',
-//    function(e) {
-//     e.preventDefault();
-//   }
-// );
-
-window.addEventListener('touchmove', function(e) {
-	e.preventDefault();
-});
