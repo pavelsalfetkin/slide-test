@@ -239,5 +239,5 @@ sliderIce.addEventListener('input', bottomSlider);
 /* ----------------------------------  INIT  ---------------------------------- */
 /* ---------------------------------------------------------------------------- */
 
-animateCircle(circleAnimRadius, 4000, 1);
-animateCircle(circleAnimRadius, 4000, 2, true);
+// animateCircle(circleAnimRadius, 4000, 1);
+// animateCircle(circleAnimRadius, 4000, 2, true);

@@ -121,7 +121,7 @@ body {
 #section1 .text-block-1,
 #section1 .text-block-2,
 #section1 .text-block-4 {
-	display: flex;
+	display: block;
 	flex-direction: column;
 	position: absolute;
 	justify-content: flex-start;
@@ -174,22 +174,34 @@ body {
 	order: 1;
 }
 
-#section1 .text-block-1 .pic {
+#circle-1-30px {
+	position: absolute;
+	top: 422px;
+	left: 271px;
 	width: 30px;
 	height: 30px;
 }
 
-#section1 .text-block-2 .pic {
+#circle-2-20px {
+	position: absolute;
+	top: 533px;
+	left: 477px;
 	width: 20px;
 	height: 20px;
 }
 
-#section1 .text-block-3 .pic {
+#circle-3-60px {
+	position: absolute;
+	top: 255px;
+	left: 558px;
 	width: 60px;
 	height: 60px;
 }
 
-#section1 .text-block-4 .pic {
+#circle-4-20px {
+	position: absolute;
+	top: 512px;
+	left: 822px;
 	width: 20px;
 	height: 20px;
 }
