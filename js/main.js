@@ -3,15 +3,17 @@
 /* ---------------------------------------------------------------------------- */
 
 
-var parallax = document.getElementById("parallax__layer--front");
 var container = document.getElementById("container");
-var sliderCont = document.getElementById("slider-cont");
-var sliderIce = document.getElementById("slider");
-var slides = document.getElementById("slides");
 var section1 = document.getElementById("section1");
 var section2 = document.getElementById("section2");
 var section3 = document.getElementById("section3");
-var sliderRunner = document.getElementById("runner");
+
+var parallax = document.getElementById("parallax__layer--front");
+
+var sliderIce = document.getElementById("slider-ice");
+var slides = document.getElementById("slides-container");
+var sliderRunner = document.getElementById("slider-runner");
+
 var rightDots = document.getElementById("right-dots");
 var bottomBlock = document.getElementById("bottom-block");
 
@@ -64,8 +66,124 @@ function animateCircle(circleArr, durationMs, index, timeout) {
 	}
 }
 
+// перемещаем контейнер с секциями на секцию 1
+var switchToSection1 = function switchToSection1() {
+	// сдвигаем элемент на всю высоту по оси Y (оси X Y Z)
+	container.style.transform = 'translate3d(0px, 0px, 0px)';
+	// плавный переход (property duration timing-function delay)
+	container.style.transition = 'all 700ms ease 0s';
+	parallax.style.transform = 'translate3d(0px, -40px, 0px)';
+	parallax.style.transition = 'all 700ms ease 0s';
+};
 
-function bottomSlider () {
+// перемещаем контейнер с секциями на секцию 2
+var switchToSection2 = function switchToSection2() {
+	container.style.transform = 'translate3d(0px, -768px, 0px)';
+	container.style.transition = 'all 700ms ease 0s';
+	parallax.style.transform = 'translate3d(0px, 0px, 0px)';
+	parallax.style.transition = 'all 1400ms ease 0s';
+	// добавляем событие которое отслеживает окончание анимации
+	container.addEventListener("transitionend", function() {
+		// когда мы переместили контейнер на секцию 2, добавляем событие 'wheel' которе отследит вращение колеса мыши или трекпада
+		// эта конструкция частично не дает проскочить мимо секции 2 когда используется трекпад на ноутбуке
+		// т.к. событие "листания" начинается на секции 1 и по инерции переходит на секцию 2 и пролистывает ее мимо
+		section2.addEventListener('wheel', switch2, false);
+	}, false);
+};
+
+// перемещаем контейнер с секциями на секцию 3
+var switchToSection3 = function switchToSection3() {
+	container.style.transform = 'translate3d(0px, -1536px, 0px)';
+	container.style.transition = 'all 700ms ease 0s';
+	parallax.style.transform = 'translate3d(0px, 80px, 0px)';
+	parallax.style.transition = 'all 700ms ease 0s';
+};
+
+// функция срабатывает на событие 'wheel' на секции 1
+var switch1 = function switch1(e) {
+	// отменяем стандартное поведение браузера на это событие
+	e.preventDefault();
+	// отслеживаем чтобы итераций листания было > 24 для избежания случайных листаний
+	// если > 0 то листаем снизу вверх
+	if (e.deltaY > 24) {
+		// удаляем событие листания на секции 2 для избежания пролистывания мимо этой секции
+		// т.к. событие "листания" начинается на одной секции и по инерции переходит на другую и пролистывает ее тоже
+		section2.removeEventListener('wheel', switch2, false);
+		switchToSection2(); 
+	}
+};
+
+// функция срабатывает на событие 'wheel' на секции 2
+var switch2 = function switch2(e) {
+	e.preventDefault();
+	// если < 0 то листаем сверху вниз
+	if (e.deltaY < -24) {
+		switchToSection1();
+	}
+	// если > 0 то листаем снизу вверх
+	else if (e.deltaY > 24) {
+		switchToSection3();
+	}
+};
+
+// функция срабатывает на событие 'wheel' на секции 3
+var switch3 = function switch3(e) {
+	e.preventDefault();
+	if (e.deltaY < -24) {
+		section2.removeEventListener('wheel', switch2, false);
+		switchToSection2();
+	}
+};
+
+// реагируем на событие 'touchstart' на секции 1
+function swipeFromSection1(e) {
+	e.preventDefault();
+	// объявляем переменную и записываем координаты начала движения
+	this.startPoint = e.targetTouches[0].clientY;
+	// объявляем переменную конечных координат движения
+	this.endPoint;
+	this.addEventListener('touchend', function() { e.preventDefault() });
+	this.addEventListener('touchcancel', function() { e.preventDefault() });
+	this.addEventListener('touchmove', function (e) {
+		e.preventDefault();
+		// записываем координаты окончания движения
+		this.endPoint = e.targetTouches[0].clientY;
+		// если начальные координаты больше конечных - произошло движение снизу вверх
+		if (this.startPoint > this.endPoint) switchToSection2();
+	}, false);
+}
+
+// реагируем на событие 'touchstart' на секции 2
+function swipeFromSection2(e) {
+	e.preventDefault();
+	this.startPoint = e.targetTouches[0].clientY;
+	this.endPoint;
+	this.addEventListener('touchend', function() { e.preventDefault() });
+	this.addEventListener('touchcancel', function() { e.preventDefault() });
+	this.addEventListener('touchmove', function (e) {
+		this.endPoint = e.targetTouches[0].clientY;
+		// если начальные координаты больше конечных - произошло движение снизу вверх
+		if (this.startPoint > this.endPoint) switchToSection3();
+		// иначе сверху вниз
+		else switchToSection1();
+	}, false);
+}
+
+// реагируем на событие 'touchstart' на секции 3
+function swipeFromSection3(e) {
+	e.preventDefault();
+	this.startPoint = e.targetTouches[0].clientY;
+	this.endPoint;
+	this.addEventListener('touchend', function() { e.preventDefault() });
+	this.addEventListener('touchcancel', function() { e.preventDefault() });
+	this.addEventListener('touchmove', function (e) {
+		this.endPoint = e.targetTouches[0].clientY;
+		if (this.startPoint < this.endPoint) switchToSection2();
+	}, false);
+}
+
+function bottomSlider (e) {
+	e.stopPropagation();
 	if (this.value <= 100 && this.value >= 71) {
 		slides.style.right = "0";
 	}
@@ -78,173 +196,24 @@ function bottomSlider () {
 	sliderRunner.style.width = RUNNER_WIDTH * this.value + "px";
 };
 
-const switchToSection1 = () => {
-	// console.log("slide to section1");
-	// section1.scrollIntoView({block: "start", behavior: "smooth"});
-	// section1.style.transform = 'translate3d(0px, 0px, 0px)';
-	// section2.style.transform = 'translate3d(0px, 0px, 0px)';
-	// section3.style.transform = 'translate3d(0px, 0px, 0px)';
-
-	// section1.style.transition = 'all 700ms ease 0s';
-	// section2.style.transition = 'all 700ms ease 0s';
-	// section3.style.transition = 'all 700ms ease 0s';
-
-	container.style.transform = 'translate3d(0px, 0px, 0px)';
-	container.style.transition = 'all 700ms ease 0s';
-
-	parallax.style.transform = 'translate3d(0px, -40px, 0px)';
-		parallax.style.transition = 'all 700ms ease 0s';
-
-	// bottomBlock.classList.remove('none');
-	// bottomBlock.classList.add('active');
-	// rightDots.children[0].classList.add('active');
-	// rightDots.children[1].classList.remove('active');
-	// rightDots.children[2].classList.remove('active');
-};
-
-const switchToSection2 = () => {
-		// console.log("slide to section2");
-		// section2.scrollIntoView({block: "start", behavior: "smooth"});
-		// section1.style.transform = 'translate3d(0px, -100%, 0px)';
-		// section2.style.transform = 'translate3d(0px, -100%, 0px)';
-		// section3.style.transform = 'translate3d(0px, -100%, 0px)';
-
-		// section1.style.transition = 'all 700ms ease 0s';
-		// section2.style.transition = 'all 700ms ease 0s';
-		// section3.style.transition = 'all 700ms ease 0s';
-
-		container.style.transform = 'translate3d(0px, -768px, 0px)';
-		container.style.transition = 'all 700ms ease 0s';
-
-		parallax.style.transform = 'translate3d(0px, 0px, 0px)';
-		parallax.style.transition = 'all 1400ms ease 0s';
-
-		// bottomBlock.classList.add('none');
-		// bottomBlock.classList.remove('active');
-		// rightDots.children[0].classList.remove('active');
-		// rightDots.children[1].classList.add('active');
-		// rightDots.children[2].classList.remove('active');
-};
-
-const switchToSection3 = () => {
-		// console.log("slide to section3");
-		// section3.scrollIntoView({block: "start", behavior: "smooth"});
-		// section1.style.transform = 'translate3d(0px, -200%, 0px)';
-		// section2.style.transform = 'translate3d(0px, -200%, 0px)';
-		// section3.style.transform = 'translate3d(0px, -200%, 0px)';
-
-		// section1.style.transition = 'all 700ms ease 0s';
-		// section2.style.transition = 'all 700ms ease 0s';
-		// section3.style.transition = 'all 700ms ease 0s';
-
-		container.style.transform = 'translate3d(0px, -1536px, 0px)';
-		container.style.transition = 'all 700ms ease 0s';
-
-		parallax.style.transform = 'translate3d(0px, 80px, 0px)';
-		parallax.style.transition = 'all 700ms ease 0s';
-
-		// rightDots.children[0].classList.remove('active');
-		// rightDots.children[1].classList.remove('active');
-		// rightDots.children[2].classList.add('active');
-};
-
-function swipeFromSection1 (event) {
-	console.log(`event.target`, event.target);
-	this.startPoint = event.targetTouches[0].clientY;
-	this.endPoint;
-	this.addEventListener('touchmove', function(event) {
-		this.endPoint = event.targetTouches[0].clientY;
-		if (this.startPoint > this.endPoint) switchToSection2();
-	});
-	// this.addEventListener('touchend', function() {
-	// 	if (this.startPoint > this.endPoint) switchToSection2();
-	// });
-}
-
-function swipeFromSection2 (event) {
-	console.log(`event.target`, event.target);
-	this.startPoint = event.targetTouches[0].clientY;
-	this.endPoint;
-	this.addEventListener('touchmove', function(event) {
-		this.endPoint = event.targetTouches[0].clientY;
-		if (this.startPoint > this.endPoint) switchToSection3();
-		else switchToSection1();
-	});
-	// this.addEventListener('touchend', function() {
-	// 	if (this.startPoint > this.endPoint) switchToSection3();
-	// 	else switchToSection1();
-	// });	
-}
-
-function swipeFromSection3 (event) {
-	console.log(`event.target`, event.target);
-	this.startPoint = event.targetTouches[0].clientY;
-	this.endPoint;
-	this.addEventListener('touchmove', function(event) {
-		this.endPoint = event.targetTouches[0].clientY;
-		if (this.startPoint < this.endPoint) switchToSection2();
-	});
-	// this.addEventListener('touchend', function() {
-	// 	if (this.startPoint < this.endPoint) switchToSection2();
-	// });
-}
-
-const touchEventRemove = () => {
-	console.log("section - remove")
-	section1.removeEventListener('touchstart', swipeFromSection1);
-	section2.removeEventListener('touchstart', swipeFromSection3);
-	section3.removeEventListener('touchstart', swipeFromSection3);
-};
-
-const touchEventAdd = () => {
-	console.log("section - add")
-	section1.addEventListener('touchstart', swipeFromSection1);
-	section2.addEventListener('touchstart', swipeFromSection2);
-	section3.addEventListener('touchstart', swipeFromSection3);
-};
-
 
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------  EVENTS  --------------------------------- */
 /* ---------------------------------------------------------------------------- */
 
 
+// отслеживаем листание на трекпаде или вращение колеса мыши на секциях
+section1.addEventListener('wheel', switch1, false);
+// это событие добавляется в функции - switchToSection2
+// section2.addEventListener('wheel', switch2, false);
+section3.addEventListener('wheel', switch3, false);
+
+// отслеживаем начало touch события на секциях
 section1.addEventListener('touchstart', swipeFromSection1, false);
 section2.addEventListener('touchstart', swipeFromSection2, false);
 section3.addEventListener('touchstart', swipeFromSection3, false);
 
-section1.addEventListener('wheel', function(e) {
-	if (e.deltaY > 10) switchToSection2();
-});
-
-section2.addEventListener('wheel', function(e) {
-	if (e.deltaY < -10) switchToSection1();
-	else if (e.deltaY > 10) switchToSection3();
-});
-
-section3.addEventListener('wheel', function(e) {
-	if (e.deltaY < -10) switchToSection2();
-});
-
-section1.addEventListener('scroll', function(e) {
-	if (e.deltaY > 10) switchToSection2();
-});
-
-section2.addEventListener('scroll', function(e) {
-	if (e.deltaY < -10) switchToSection1();
-	else if (e.deltaY > 10) switchToSection3();
-});
-
-section3.addEventListener('scroll', function(e) {
-	if (e.deltaY < -10) switchToSection2();
-});
-
-sliderIce.addEventListener('touchstart', touchEventRemove);
-sliderIce.addEventListener('touchend', touchEventAdd);
-
 sliderIce.addEventListener('input', bottomSlider);
-
-document.addEventListener("touchmove", function(e){ e.preventDefault() }, false);
 
 // screen.lockOrientation('landscape');
 
