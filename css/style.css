@@ -120,19 +120,14 @@ body {
 
 #section1 .text-block-1,
 #section1 .text-block-2,
+#section1 .text-block-3,
 #section1 .text-block-4 {
-	display: block;
-	flex-direction: column;
 	position: absolute;
-	justify-content: flex-start;
-	align-items: center;
-}
-
-#section1 .text-block-3 {
-	display: flex;
-	position: absolute;
-	justify-content: flex-start;
-	align-items: center;
+	font-family: 'Gotham Pro', sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	margin-bottom: 12px;
+	color: #0d319c;
 }
 
 #section1 .text-block-1 {
@@ -146,32 +141,13 @@ body {
 }
 
 #section1 .text-block-3 {
-	top: 255px;
-	left: 558px;
+	top: 274px;
+	left: 635px;
 }
 
 #section1 .text-block-4 {
 	top: 481px;
 	left: 784px;
-}
-
-#section1 .text-block-1 .text,
-#section1 .text-block-2 .text,
-#section1 .text-block-4 .text {
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: normal;
-	font-size: 20px;
-	margin-bottom: 12px;
-	color: #0d319c;
-}
-
-#section1 .text-block-3 .text {
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: normal;
-	font-size: 20px;
-	margin-left: 12px;
-	color: #0d319c;
-	order: 1;
 }
 
 #circle-1-30px {

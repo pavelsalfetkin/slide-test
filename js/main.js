@@ -31,9 +31,9 @@ var circleAnimRadius = [circle1R30, circle2R20, circle3R60, circle4R20];
 
 var RUNNER_WIDTH = sliderRunner.offsetWidth / 100;
 
-circleAnimRadius.forEach(function (circle) {
-	return circle.children[1].r.baseVal.value = 0;
-});
+// circleAnimRadius.forEach(function (circle) {
+// 	return circle.children[1].r.baseVal.value = 0;
+// });
 circleAnimRadius.forEach(function (circle) {
 	return circle.children[2].r.baseVal.value = 0;
 });
@@ -85,7 +85,7 @@ var switchToSection1 = function switchToSection1() {
 
 // перемещаем контейнер с секциями на секцию 2
 var switchToSection2 = function switchToSection2() {
-	container.style.transform = 'translate3d(0px, -868px, 0px)';
+	container.style.transform = 'translate3d(0px, -768px, 0px)';
 	container.style.transition = 'all 700ms ease 0s';
 	parallax.style.transform = 'translate3d(0px, 0px, 0px)';
 	parallax.style.transition = 'all 1400ms ease 0s';
@@ -100,7 +100,7 @@ var switchToSection2 = function switchToSection2() {
 
 // перемещаем контейнер с секциями на секцию 3
 var switchToSection3 = function switchToSection3() {
-	container.style.transform = 'translate3d(0px, -1636px, 0px)';
+	container.style.transform = 'translate3d(0px, -1536px, 0px)';
 	container.style.transition = 'all 700ms ease 0s';
 	parallax.style.transform = 'translate3d(0px, 80px, 0px)';
 	parallax.style.transition = 'all 700ms ease 0s';
