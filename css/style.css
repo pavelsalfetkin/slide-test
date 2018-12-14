@@ -199,6 +199,10 @@ body {
 	align-items: center;
 	min-width: 1024px;
 	min-height: 768px;
+	top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
 	background: url(../img/slide-2/slide-2-front.png) 50% 50% no-repeat;
 	background-size: cover;
 	transform: translate3d(0px, -40px, 0px);
