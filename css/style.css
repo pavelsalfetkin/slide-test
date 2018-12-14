@@ -31,20 +31,303 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+	touch-action: none;
+}
+
+#container {
+	position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+	background-color: rgba(210, 194, 157, 1);
+	touch-action: none;
+}
+
+
+/* ---------------------------------------------------------------------------- */
+/* ------------------------------- SECTION ALL -------------------------------- */
+/* ---------------------------------------------------------------------------- */
+
+
+#section1,
+#section2,
+#section3 {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
-	height: 100%;
+	height: 768px;
+}
+
+#section1 { background-color: #0088ff; }
+#section2 { background-color: #00539C; }
+#section3 { background-color: #00294d; }
+
+#section1 .section-content,
+#section2 .section-content,
+#section3 .section-content {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	width: 1024px;
+	height: 768px;
 	overflow: hidden;
 }
 
-.container {
-	width: 100%;
+#section1 .section-content {
+	background: url(../img/slide-1/slide-1.jpg) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+#section2 .section-content {
+	background: url(../img/slide-2/slide-2.jpg) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+#section3 .section-content {
+	background: url(../img/slide-3/slide-3.jpg) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------- SECTION 1 --------------------------------- */
+/* ---------------------------------------------------------------------------- */
+
+
+#section1 .title {
+	position: absolute;
+	font-family: 'Gotham Pro', sans-serif;
+	font-weight: normal;
+	font-size: 48px;
+	color: #0d319c;
+	line-height: 64px;
+	top: 116px;
+	left: 72px;
+}
+
+#section1 .text-block-1,
+#section1 .text-block-2,
+#section1 .text-block-4 {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#section1 .text-block-3 {
+	display: flex;
+	position: absolute;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#section1 .text-block-1 {
+	top: 392px;
+	left: 214px;
+}
+
+#section1 .text-block-2 {
+	top: 502px;
+	left: 404px;
+}
+
+#section1 .text-block-3 {
+	top: 255px;
+	left: 558px;
+}
+
+#section1 .text-block-4 {
+	top: 481px;
+	left: 784px;
+}
+
+#section1 .text-block-1 .text,
+#section1 .text-block-2 .text,
+#section1 .text-block-4 .text {
+	font-family: 'Gotham Pro', sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	margin-bottom: 12px;
+	color: #0d319c;
+}
+
+#section1 .text-block-3 .text {
+	font-family: 'Gotham Pro', sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	margin-left: 12px;
+	color: #0d319c;
+	order: 1;
+}
+
+#section1 .text-block-1 .pic {
+	width: 30px;
+	height: 30px;
+}
+
+#section1 .text-block-2 .pic {
+	width: 20px;
+	height: 20px;
+}
+
+#section1 .text-block-3 .pic {
+	width: 60px;
+	height: 60px;
+}
+
+#section1 .text-block-4 .pic {
+	width: 20px;
+	height: 20px;
+}
+
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------- SECTION 2 --------------------------------- */
+/* ---------------------------------------------------------------------------- */
+
+
+#parallax__layer--front {
+	display: flex;
+	position: absolute;
+	justify-content: center;
+	align-items: center;
+	min-width: 1024px;
+	min-height: 768px;
+	background: url(../img/slide-2/slide-2-front.png) 50% 50% no-repeat;
+	background-size: cover;
+	transform: translate3d(0px, -40px, 0px);
+}
+
+#section2 .title {
+	margin-top: -120px;
+	font-family: 'Gotham Pro', sans-serif;
+	font-weight: 100;
+	font-size: 48px;
+	color: white;
+	line-height: 64px;
+	text-align: center;
+}
+
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------- SECTION 3 --------------------------------- */
+/* ---------------------------------------------------------------------------- */
+
+
+#slides-container {
+	display: flex;
+	position: absolute;
+	justify-content: space-between;
+	align-items: center;
 	height: 100%;
-	touch-action: none;
-  /* overflow-x: hidden; */
-	/* overflow-y: hidden; */
-	/* overflow: auto; */
-  /* -webkit-perspective: 100px;
-	perspective: 100px; */
+	right: 0px;
+	transition-duration: 1s;
+}
+
+#slides-container div {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	width: 1024px;
+	height: 768px;
+	
+}
+
+#slides-container div:nth-child(1) {
+	background: url(../img/slide-3/slide-3-3.png) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+#slides-container div:nth-child(2) {
+	background: url(../img/slide-3/slide-3-2.png) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+#slides-container div:nth-child(3) {
+	background: url(../img/slide-3/slide-3-1.png) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+#slider {
+	display: flex;
+	position: absolute;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	align-self: flex-end;
+	width: 600px;
+	bottom: 28px;
+	z-index: 10;
+}
+
+#slider .slider-move {
+	display: flex;
+	position: relative;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: 60px;
+}
+
+#slider .slider-years {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	width: 570px;
+	margin-top: 16px;
+}
+
+#slider-ice {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%;
+	height: 80px;
+	background: none;
+  outline: none;
+	z-index: 20;
+}
+
+#slider-ice::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+	appearance: none;
+  width: 46px;
+  height: 58px;
+  background: url(../img/slide-3/ise-handler.svg) 50% 50% no-repeat;
+  cursor: pointer;
+}
+
+#slider-runner {
+	position: absolute;
+	width: 570px;
+	height: 12px;
+	background: #d2e8f8;
+	opacity: 0.8;
+	margin-left: 15px;
+}
+
+.slider-move .slider-runner-transparent {
+	position: absolute;
+	width: 570px;
+	height: 12px;
+	background: #d2e8f8;
+	opacity: 0.8;
+	margin-left: 15px;
+	opacity: 0.2;
+}
+
+.slider-years span {
+	font-family: 'Gotham Pro', sans-serif;
+	font-weight: 100;
+	font-size: 20px;
+	color: white;
 }
 
 
@@ -141,318 +424,4 @@ body {
 
 #bottom-block .bottom-block__arrow {
 	margin-top: 10px;
-}
-
-
-/* ---------------------------------------------------------------------------- */
-/* ------------------------------- SECTION ALL -------------------------------- */
-/* ---------------------------------------------------------------------------- */
-
-
-#section1,
-#section2,
-#section3 {
-	display: flex;
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	min-height: 768px;
-}
-
-#section1 .section-cont,
-#section2 .section-cont,
-#section3 .section-cont {
-	display: flex;
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	min-width: 1024px;
-	min-height: 768px;
-	overflow: hidden;
-}
-
-#section1 .section-cont {
-	background: url(../img/slide-1/slide-1.jpg) 50% 50% no-repeat;
-	background-size: cover;
-}
-
-#section2 .section-cont {
-	background: url(../img/slide-2/slide-2.jpg) 50% 50% no-repeat;
-	background-size: cover;
-}
-
-#section3 .section-cont {
-	background: url(../img/slide-3/slide-3.jpg) 50% 50% no-repeat;
-	background-size: cover;
-}
-
-
-/* ---------------------------------------------------------------------------- */
-/* ------------------------------ PARALAX LAYER ------------------------------- */
-/* ---------------------------------------------------------------------------- */
-
-
-.parallax__layer {
-	display: flex;
-	position: absolute;
-	justify-content: flex-start;
-	align-items: flex-start;
-	min-width: 1024px;
-	min-height: 768px;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-
-
-/* ---------------------------------------------------------------------------- */
-/* -------------------------------- SECTION 1 --------------------------------- */
-/* ---------------------------------------------------------------------------- */
-
-
-#section1 .parallax__layer .title {
-	position: absolute;
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: normal;
-	font-size: 48px;
-	color: #0d319c;
-	line-height: 64px;
-	top: 116px;
-	left: 72px;
-}
-
-#section1 .parallax__layer .text-block-1,
-#section1 .parallax__layer .text-block-2,
-#section1 .parallax__layer .text-block-4 {
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	justify-content: flex-start;
-	align-items: center;
-}
-
-#section1 .parallax__layer .text-block-3 {
-	display: flex;
-	position: absolute;
-	justify-content: flex-start;
-	align-items: center;
-}
-
-#section1 .parallax__layer .text-block-1 {
-	top: 393px;
-	left: 215px;
-}
-
-#section1 .parallax__layer .text-block-2 {
-	top: 503px;
-	left: 404px;
-}
-
-#section1 .parallax__layer .text-block-3 {
-	top: 255px;
-	left: 559px;
-}
-
-#section1 .parallax__layer .text-block-4 {
-	top: 483px;
-	left: 782px;
-}
-
-#section1 .parallax__layer .text-block-1 .text,
-#section1 .parallax__layer .text-block-2 .text,
-#section1 .parallax__layer .text-block-4 .text {
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: normal;
-	font-size: 20px;
-	margin-bottom: 12px;
-	color: #0d319c;
-}
-
-#section1 .parallax__layer .text-block-3 .text {
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: normal;
-	font-size: 20px;
-	color: #0d319c;
-	margin-left: 12px;
-	order: 1;
-}
-
-#section1 .parallax__layer .text-block-1 .pic {
-	width: 30px;
-	height: 30px;
-}
-
-#section1 .parallax__layer .text-block-2 .pic {
-	width: 20px;
-	height: 20px;
-}
-
-#section1 .parallax__layer .text-block-3 .pic {
-	width: 60px;
-	height: 60px;
-}
-
-#section1 .parallax__layer .text-block-4 .pic {
-	width: 20px;
-	height: 20px;
-}
-
-
-/* ---------------------------------------------------------------------------- */
-/* -------------------------------- SECTION 2 --------------------------------- */
-/* ---------------------------------------------------------------------------- */
-
-
-#section2 .parallax__layer--front {
-	background: url(../img/slide-2/slide-2-1.jpg),
-		url(../img/slide-2/slide-2-2.jpg),
-		url(../img/slide-2/slide-2-3.jpg),
-		url(../img/slide-2/slide-2-4.jpg) 50% 50% no-repeat;
-	background-size: cover;
-	/* -webkit-transform: translateZ(-5px) scale(1.05);
-	transform: translateZ(-5px) scale(1.05); */
-	z-index: 3;
-}
-
-#section2 .parallax__layer--base {
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	/* -webkit-transform: translateZ(0);
-	transform: translateZ(0); */
-	z-index: 3;
-}
-
-#section2 .parallax__layer .title {
-	margin-top: 240px;
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: 100;
-	font-size: 48px;
-	color: white;
-	line-height: 64px;
-	text-align: center;
-}
-
-
-/* ---------------------------------------------------------------------------- */
-/* -------------------------------- SECTION 3 --------------------------------- */
-/* ---------------------------------------------------------------------------- */
-
-
-#section3 .parallax__layer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.slides-container {
-	display: flex;
-	position: absolute;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
-	right: 0px;
-	transition-duration: 1s;
-}
-
-.slides-container div {
-	display: flex;
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	width: 1024px;
-	height: 768px;
-	
-}
-
-.slides-container div:nth-child(1) {
-	background: url(../img/slide-3/slide-3-3.png) 50% 50% no-repeat;
-	background-size: cover;
-}
-
-.slides-container div:nth-child(2) {
-	background: url(../img/slide-3/slide-3-2.png) 50% 50% no-repeat;
-	background-size: cover;
-}
-
-.slides-container div:nth-child(3) {
-	background: url(../img/slide-3/slide-3-1.png) 50% 50% no-repeat;
-	background-size: cover;
-}
-
-.slider-container {
-	display: flex;
-	position: absolute;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	align-self: flex-end;
-	width: 600px;
-	bottom: 28px;
-	z-index: 10;
-}
-
-.slider-container .slider-move {
-	display: flex;
-	position: relative;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	height: 60px;
-}
-
-.slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
-  appearance: none;
-  width: 100%;
-	height: 80px;
-	background: none;
-  outline: none;
-	z-index: 20;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-	appearance: none;
-  width: 46px;
-  height: 58px;
-  background: url(../img/slide-3/ise-handler.svg) 50% 50% no-repeat;
-  cursor: pointer;
-}
-
-.slider-move .slider-runner,
-.slider-move .slider-runner-transparent {
-	position: absolute;
-	width: 570px;
-	height: 12px;
-	background: #d2e8f8;
-	opacity: 0.8;
-	margin-left: 15px;
-}
-
-.slider-move .slider-runner-transparent { opacity: 0.2; }
-
-.slider-container .slider-years {
-	display: flex;
-	position: relative;
-	justify-content: space-between;
-	align-items: center;
-	width: 570px;
-	margin-top: 16px;
-}
-
-.slider-years span {
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: 100;
-	font-size: 20px;
-	color: white;
-}
-
-.slider-years span {
-	font-family: 'Gotham Pro', sans-serif;
-	font-weight: 100;
-	font-size: 20px;
-	color: white;
 }
