@@ -1,5 +1,3 @@
-"use strict";
-
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------  CONST  ---------------------------------- */
 /* ---------------------------------------------------------------------------- */
@@ -32,14 +30,10 @@ var circleAnimRadius = [circle1R30, circle2R20, circle3R60, circle4R20];
 /* ---------------------------------------------------------------------------- */
 
 
-var RUNNER_WIDTH = sliderRunner.offsetWidth / 100;
+const RUNNER_WIDTH = sliderRunner.offsetWidth / 100;
 
-circleAnimRadius.forEach(function (circle) {
-	return circle.children[1].r.baseVal.value = 0;
-});
-circleAnimRadius.forEach(function (circle) {
-	return circle.children[2].r.baseVal.value = 0;
-});
+circleAnimRadius.forEach(circle => circle.children[1].r.baseVal.value = 0);
+circleAnimRadius.forEach(circle => circle.children[2].r.baseVal.value = 0);
 
 function animateCircle(circleArr, durationMs, index, timeout) {
 	var runtime;
@@ -50,13 +44,12 @@ function animateCircle(circleArr, durationMs, index, timeout) {
 	function loop(timestamp) {
 		runtime = timestamp - starttime;
 		progress = Math.min(runtime / duration, 1);
-		circleArr.forEach(function (circle) {
-			return circle.children[index].r.baseVal.value = (circle.children[0].r.baseVal.value * progress).toFixed(2);
-		});
+		circleArr.forEach(circle => circle.children[index].r.baseVal.value = (circle.children[0].r.baseVal.value * progress).toFixed(2));
 		if (runtime >= duration) {
 			starttime = window.performance.now();
 			window.requestAnimationFrame(loop);
-		} else {
+		}
+		else {
 			window.requestAnimationFrame(loop);
 		}
 	};
@@ -64,8 +57,9 @@ function animateCircle(circleArr, durationMs, index, timeout) {
 	if (!timeout) {
 		starttime = window.performance.now();
 		window.requestAnimationFrame(loop);
-	} else {
-		setTimeout(function () {
+	}
+	else {
+		setTimeout(function() {
 			starttime = window.performance.now();
 			window.requestAnimationFrame(loop);
 		}, duration / 2);
@@ -89,7 +83,7 @@ var switchToSection2 = function switchToSection2() {
 	parallax.style.transform = 'translate3d(0px, 0px, 0px)';
 	parallax.style.transition = 'all 1400ms ease 0s';
 	// добавляем событие которое отслеживает окончание анимации
-	container.addEventListener("transitionend", function () {
+	container.addEventListener("transitionend", function() {
 		// когда мы переместили контейнер на секцию 2, добавляем событие 'wheel' которе отследит вращение колеса мыши или трекпада
 		// эта конструкция частично не дает проскочить мимо секции 2 когда используется трекпад на ноутбуке
 		// т.к. событие "листания" начинается на секции 1 и по инерции переходит на секцию 2 и пролистывает ее мимо
@@ -115,7 +109,7 @@ var switch1 = function switch1(e) {
 		// удаляем событие листания на секции 2 для избежания пролистывания мимо этой секции
 		// т.к. событие "листания" начинается на одной секции и по инерции переходит на другую и пролистывает ее тоже
 		section2.removeEventListener('wheel', switch2, false);
-		switchToSection2();
+		switchToSection2(); 
 	}
 };
 
@@ -128,8 +122,8 @@ var switch2 = function switch2(e) {
 	}
 	// если > 0 то листаем снизу вверх
 	else if (e.deltaY > 24) {
-			switchToSection3();
-		}
+		switchToSection3();
+	}
 };
 
 // функция срабатывает на событие 'wheel' на секции 3
@@ -148,12 +142,8 @@ function swipeFromSection1(e) {
 	this.startPoint = e.targetTouches[0].clientY;
 	// объявляем переменную конечных координат движения
 	this.endPoint;
-	this.addEventListener('touchend', function () {
-		e.preventDefault();
-	});
-	this.addEventListener('touchcancel', function () {
-		e.preventDefault();
-	});
+	this.addEventListener('touchend', function() { e.preventDefault() });
+	this.addEventListener('touchcancel', function() { e.preventDefault() });
 	this.addEventListener('touchmove', function (e) {
 		e.preventDefault();
 		// записываем координаты окончания движения
@@ -168,12 +158,8 @@ function swipeFromSection2(e) {
 	e.preventDefault();
 	this.startPoint = e.targetTouches[0].clientY;
 	this.endPoint;
-	this.addEventListener('touchend', function () {
-		e.preventDefault();
-	});
-	this.addEventListener('touchcancel', function () {
-		e.preventDefault();
-	});
+	this.addEventListener('touchend', function() { e.preventDefault() });
+	this.addEventListener('touchcancel', function() { e.preventDefault() });
 	this.addEventListener('touchmove', function (e) {
 		this.endPoint = e.targetTouches[0].clientY;
 		// если начальные координаты больше конечных - произошло движение снизу вверх
@@ -188,19 +174,15 @@ function swipeFromSection3(e) {
 	e.preventDefault();
 	this.startPoint = e.targetTouches[0].clientY;
 	this.endPoint;
-	this.addEventListener('touchend', function () {
-		e.preventDefault();
-	});
-	this.addEventListener('touchcancel', function () {
-		e.preventDefault();
-	});
+	this.addEventListener('touchend', function() { e.preventDefault() });
+	this.addEventListener('touchcancel', function() { e.preventDefault() });
 	this.addEventListener('touchmove', function (e) {
 		this.endPoint = e.targetTouches[0].clientY;
 		if (this.startPoint < this.endPoint) switchToSection2();
 	}, false);
 }
 
-function bottomSlider(e) {
+function bottomSlider (e) {
 	e.stopPropagation();
 	if (this.value <= 100 && this.value >= 71) {
 		slides.style.right = "0";
@@ -232,6 +214,8 @@ section2.addEventListener('touchstart', swipeFromSection2, false);
 section3.addEventListener('touchstart', swipeFromSection3, false);
 
 sliderIce.addEventListener('input', bottomSlider);
+
+// screen.lockOrientation('landscape');
 
 
 /* ---------------------------------------------------------------------------- */
