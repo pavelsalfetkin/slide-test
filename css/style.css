@@ -425,3 +425,23 @@ body {
 #bottom-block .bottom-block__arrow {
 	margin-top: 10px;
 }
+
+
+
+
+
+#fullscreen,
+#exitFullscreen {
+	display: inline-block;
+	position: relative;
+	font-size: 16px;
+	font-weight: 300;
+	letter-spacing: 1pt;
+	height: 40px;
+	width: 168px;
+	border: none;
+	outline: none;
+	transition-duration: 0.5s;
+	cursor: pointer;
+	z-index: 10;
+}

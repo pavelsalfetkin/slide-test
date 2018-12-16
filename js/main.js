@@ -23,6 +23,9 @@ var circle2R20 = document.getElementById("circle-2-20px");
 var circle3R60 = document.getElementById("circle-3-60px");
 var circle4R20 = document.getElementById("circle-4-20px");
 
+var fullscreen = document.getElementById("fullscreen");
+var exitFullscreen = document.getElementById("exitFullscreen");
+
 var circleAnimRadius = [circle1R30, circle2R20, circle3R60, circle4R20];
 
 /* ---------------------------------------------------------------------------- */
@@ -231,6 +234,16 @@ section2.addEventListener('touchstart', swipeFromSection2, false);
 section3.addEventListener('touchstart', swipeFromSection3, false);
 
 sliderIce.addEventListener('input', bottomSlider);
+
+fullscreen.addEventListener('touchstart', function() {
+	console.log("document.body.requestFullscreen()");
+	document.body.requestFullscreen();
+}, false);
+
+exitFullscreen.addEventListener('touchstart', function() {
+	console.log("document.exitFullscreen()");
+	document.exitFullscreen();
+}, false);
 
 // screen.lockOrientation('landscape');
 
