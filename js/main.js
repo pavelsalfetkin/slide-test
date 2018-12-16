@@ -235,14 +235,16 @@ section3.addEventListener('touchstart', swipeFromSection3, false);
 
 sliderIce.addEventListener('input', bottomSlider);
 
-fullscreen.addEventListener('touchstart', function() {
+fullscreen.addEventListener('click', function() {
 	console.log("document.body.requestFullscreen()");
 	document.body.requestFullscreen();
+	document.body.webkitRequestFullScreen()
 }, false);
 
-exitFullscreen.addEventListener('touchstart', function() {
+exitFullscreen.addEventListener('click', function() {
 	console.log("document.exitFullscreen()");
 	document.exitFullscreen();
+	document.webkitExitFullscreen();
 }, false);
 
 // screen.lockOrientation('landscape');

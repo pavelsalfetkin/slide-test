@@ -429,8 +429,8 @@ body {
 
 .fullscreen {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 10px;
+	left: 10px;
 }
 
 
