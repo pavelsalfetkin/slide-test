@@ -112,7 +112,7 @@ var switchToSection3 = function switchToSection3() {
 // функция срабатывает на событие 'wheel' на секции 1
 var switch1 = function switch1(e) {
 	// отменяем стандартное поведение браузера на это событие
-	e.preventDefault();
+	// e.preventDefault();
 	// отслеживаем чтобы итераций листания было > 24 для избежания случайных листаний
 	// если > 0 то листаем снизу вверх
 	if (e.deltaY > 24) {
@@ -147,19 +147,19 @@ var switch3 = function switch3(e) {
 
 // реагируем на событие 'touchstart' на секции 1
 function swipeFromSection1(e) {
-	e.preventDefault();
+	// e.preventDefault();
 	// объявляем переменную и записываем координаты начала движения
 	this.startPoint = e.targetTouches[0].clientY;
 	// объявляем переменную конечных координат движения
 	this.endPoint;
 	this.addEventListener('touchend', function () {
-		e.preventDefault();
+		// e.preventDefault();
 	});
 	this.addEventListener('touchcancel', function () {
-		e.preventDefault();
+		// e.preventDefault();
 	});
 	this.addEventListener('touchmove', function (e) {
-		e.preventDefault();
+		// e.preventDefault();
 		// записываем координаты окончания движения
 		this.endPoint = e.targetTouches[0].clientY;
 		// если начальные координаты больше конечных - произошло движение снизу вверх
