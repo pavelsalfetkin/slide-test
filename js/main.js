@@ -256,3 +256,11 @@ exitFullscreen.addEventListener('click', function() {
 
 // animateCircle(circleAnimRadius, 4000, 1);
 // animateCircle(circleAnimRadius, 4000, 2, true);
+
+
+window.addEventListener("load",function() {
+	setTimeout(function(){
+			// This hides the address bar:
+			window.scrollTo(0, 1);
+	}, 0);
+});
